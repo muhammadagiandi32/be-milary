@@ -60,6 +60,7 @@ class OrderController extends Controller
                 $check_stock = DB::table('stocks')
                     ->where('ItemsId', $request->item_id[$i])
                     ->first();
+                // return $check_stock;
                 if ($check_stock->Stock < $request->qty[$i]) {
                     return response()->json(['metadata' => [
                         'path' => '/inventory',
@@ -84,16 +85,46 @@ class OrderController extends Controller
                 'message' => 'Order Has Ben Created'
             ], 201);
         } catch (QueryException $th) {
-            throw $th;
+            return response()->json(['metadata' => [
+                'path' => '/inventory',
+                'http_status_code' => 'Bad Request',
+                'errors' => 'Insufficient Stock',
+                'timestamp' => now()->timestamp
+            ]], 400);
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
         //
+        $data_order = DB::table('orders')->select('*', 'orders.uuid as uuid')
+            ->leftJoin('items', 'orders.ItemsId', '=', 'items.uuid')
+            ->get();
+        // return $data_order;
+
+        foreach ($data_order as $data) {
+            $result[] =  [
+                // 'DetailsItems' => [
+                'ItemsId' => $data->ItemsId,
+                'ItemName' => $data->ItemName,
+                'Qty' => $data->Qty,
+                'Size' => $data->Size,
+                'Price' => $data->Price
+                // ]
+            ];
+        }
+        return response()->json([
+            'metadata' => [
+                'path' => '/inventory',
+                'http_status_code' => 'OK',
+                'timestamp' => now()->timestamp,
+                'order_id' => $data_order[0]->uuid,
+                'data' => $result
+            ]
+        ], 200);
     }
 
     /**
