@@ -39,6 +39,8 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
     Route::post('register', [AuthController::class, 'register']);
+    Route::get('verify/{id}', [AuthController::class, 'verifyUser']);
+
 });
 
 Route::post('inventory', [ItemsController::class, 'store'])->middleware([AccessToken::class]);

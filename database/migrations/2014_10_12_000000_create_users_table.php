@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('post_code');
             $table->rememberToken();
+            $table->boolean('is_verified')->default(0);
             $table->timestamps();
         });
     }
