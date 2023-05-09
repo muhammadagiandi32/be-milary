@@ -7,6 +7,7 @@ use App\Http\Controllers\Inventory\OrderController;
 use App\Http\Middleware\AccessToken;
 use App\Mail\IncomeMember;
 use App\Models\Items;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,16 @@ Route::get('inventory/get-order', [OrderController::class, 'show']);
 
 Route::post('notifications/emails', [emailController::class, 'store']);
 
+Route::get('/test/paginate', function(){
+    $data = User::paginate(10);
+    return response()->json(['metadata' => [
+        'path' => '/',
+        'http_status_code' => 'OK',
+        'timestamp' => now()->timestamp,
+        'message'=>'Account already verified...',
+        'data' => $data,
+    ]], 200);
+});
 
 Route::get('test', function () {
 
