@@ -112,10 +112,7 @@ class AuthController extends Controller
             $user = User::find($check->user_id);
 
             if($user->is_verified == 1){
-                // return response()->json([
-                //     'success'=> true,
-                //     'message'=> 'Account already verified..'
-                // ]);
+
                 return response()->json(['metadata' => [
                     'path' => '/auth/register',
                     'http_status_code' => 'OK',
@@ -128,10 +125,6 @@ class AuthController extends Controller
             $user->update(['is_verified' => 1]);
             DB::table('user_verifications')->where('token',$verification_code)->delete();
 
-            // return response()->json([
-            //     'success'=> true,
-            //     'message'=> 'You have successfully verified your email address.'
-            // ]);
             return response()->json(['metadata' => [
                 'path' => '/auth',
                 'http_status_code' => 'OK',
