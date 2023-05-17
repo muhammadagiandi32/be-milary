@@ -64,6 +64,7 @@ class AuthController extends Controller
             'email' => 'required|unique:users,email',
             'password' => 'required'
         ]);
+
         if ($validator->fails()) {
             return response()->json(['metadata' => [
                 'path' => '/auth/register',
