@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
 use App\Models\Items;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,22 @@ class ItemsController extends Controller
     public function create()
     {
         //
+        $data = User::all();
+        // return response()->json(["data" => $data]);
+        return response()->json([
+            'metadata' => [
+                'path' => '/inventory',
+                'http_status_code' => 'Created',
+                'timestamp' => now()->timestamp,
+                // 'order_id' => $uuid,
+            ],
+            'data' => $data,
+            'draw' => $data->count(),
+            'recordsTotal' => $data->count(),
+            'message' => 'Data',
+
+
+        ], 200);
     }
 
     /**

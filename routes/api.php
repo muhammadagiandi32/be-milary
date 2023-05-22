@@ -41,104 +41,111 @@ Route::group([
     Route::post('me', [AuthController::class, 'me']);
     Route::post('register', [AuthController::class, 'register']);
     Route::get('verify/{id}', [AuthController::class, 'verifyUser']);
-
 });
 
-Route::post('inventory', [ItemsController::class, 'store'])->middleware([AccessToken::class]);
-Route::post('inventory/order', [OrderController::class, 'store']);
-Route::get('inventory/get-order', [OrderController::class, 'show']);
+Route::prefix('inventory')->group(function () {
+    Route::get('/users', function () {
+        // Matches The "/admin/users" URL
+    });
+    Route::get('get-items', [ItemsController::class, 'create'])->name('inventory-item-create');
+    Route::post('order', [OrderController::class, 'store'])->name('inventory-order-store');
+    Route::get('get-order', [OrderController::class, 'show'])->name('inventory-order-show');
+})->middleware([AccessToken::class]);
+
 
 Route::post('notifications/emails', [emailController::class, 'store']);
 
-Route::get('/test/paginate', function(){
+Route::get('/test/paginate', function () {
     $data = User::paginate(10);
-    return response()->json(['metadata' => [
-        'path' => '/',
-        'http_status_code' => 'OK',
-        'timestamp' => now()->timestamp,
-        'message'=>'Account already verified...',
+    return response()->json([
+        'metadata' => [
+            'path' => '/',
+            'http_status_code' => 'OK',
+            'timestamp' => now()->timestamp,
+            'message' => 'Account already verified...',
+        ],
         'data' => $data,
-    ]], 200);
+    ], 200);
 });
 
-Route::get('test', function () {
+// Route::get('test', function () {
 
-    // Data Item Dari Database
-    $item = Items::get();
+//     // Data Item Dari Database
+//     $item = Items::get();
 
-    // looping item
-    foreach ($item as $items) {
-        // result untuk payload Items
-        $result_items[] = [
-            'name' => $items->ItemName,
-            'size' => $items->Size,
-            'qty'  => 1,
-            'price' => intval($items->Price)
-        ];
+//     // looping item
+//     foreach ($item as $items) {
+//         // result untuk payload Items
+//         $result_items[] = [
+//             'name' => $items->ItemName,
+//             'size' => $items->Size,
+//             'qty'  => 1,
+//             'price' => intval($items->Price)
+//         ];
 
-        // array untuk mendapatkan sie dan qty
-        $size[] = [
-            'size' => $items->Size,
-            'qty'  => 1
-        ];
-    }
+//         // array untuk mendapatkan sie dan qty
+//         $size[] = [
+//             'size' => $items->Size,
+//             'qty'  => 1
+//         ];
+//     }
 
-    // Merubah Multidimensional Array to String
-    $str_size = [];
-    foreach ($size as $sizes) {
-        $str_size[] = implode(' ', $sizes);
-    }
+//     // Merubah Multidimensional Array to String
+//     $str_size = [];
+//     foreach ($size as $sizes) {
+//         $str_size[] = implode(' ', $sizes);
+//     }
 
-    // parameter untuk No Invoice
-    $inv = 'INV000000003';
-    $payload = [
-        'consignee' => [
-            'name' => 'edbert angriawan',
-            'phone_number' => '6287812670688'
-        ],
-        'consigner' => [
-            'name' => 'Aerospace',
-            'phone_number' => '6281226608686'
-        ],
-        'courier' => [
-            'cod' => false,
-            'rate_id' => 1,
-            'use_insurance' => true
-        ],
-        'external_id' => $inv,
-        'coverage' => 'domestic',
-        'origin' => [
-            'address' => 'Jl. Kemandoran VIII No.14 RT.7/RW.3 Grogol Utara , Kebayoran Lama, Jakarta Selatan 12210, Indonesia',
-            'area_id' => 12210,
-            'lat' => '-6.210514502685641',
-            'lng' => '106.78521108178155'
-        ],
-        'destination' => [
-            'address' => 'Jalan Kaliurang km 12.5, Candi Karang, Sardonoharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581',
-            'area_id' => 55581,
-            'lat' => '-6.210514502685641',
-            'lng' => '106.78521108178155',
-            // payload untuk direction (Catatan pada Resi). 
-            // $inv Diambil dari parameter no Invoice.
-            // fungsi implode digunakan untuk memisahkan Array menjadi ', '. $str_size diambil dari Multidimensional Array.
-            'direction' => $inv . '. ' . implode(", ", $str_size)
-        ],
-        'package' => [
-            'height' => 12,
-            'items'  => $result_items,
-            'length' => 12,
-            'package_type' => 2,
-            'price' => 678000,
-            'weight' => 1,
-            'width' => 12
-        ],
-        'payment_type' => 'postpay'
-    ];
-    // return $payload;
+//     // parameter untuk No Invoice
+//     $inv = 'INV000000003';
+//     $payload = [
+//         'consignee' => [
+//             'name' => 'edbert angriawan',
+//             'phone_number' => '6287812670688'
+//         ],
+//         'consigner' => [
+//             'name' => 'Aerospace',
+//             'phone_number' => '6281226608686'
+//         ],
+//         'courier' => [
+//             'cod' => false,
+//             'rate_id' => 1,
+//             'use_insurance' => true
+//         ],
+//         'external_id' => $inv,
+//         'coverage' => 'domestic',
+//         'origin' => [
+//             'address' => 'Jl. Kemandoran VIII No.14 RT.7/RW.3 Grogol Utara , Kebayoran Lama, Jakarta Selatan 12210, Indonesia',
+//             'area_id' => 12210,
+//             'lat' => '-6.210514502685641',
+//             'lng' => '106.78521108178155'
+//         ],
+//         'destination' => [
+//             'address' => 'Jalan Kaliurang km 12.5, Candi Karang, Sardonoharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581',
+//             'area_id' => 55581,
+//             'lat' => '-6.210514502685641',
+//             'lng' => '106.78521108178155',
+//             // payload untuk direction (Catatan pada Resi). 
+//             // $inv Diambil dari parameter no Invoice.
+//             // fungsi implode digunakan untuk memisahkan Array menjadi ', '. $str_size diambil dari Multidimensional Array.
+//             'direction' => $inv . '. ' . implode(", ", $str_size)
+//         ],
+//         'package' => [
+//             'height' => 12,
+//             'items'  => $result_items,
+//             'length' => 12,
+//             'package_type' => 2,
+//             'price' => 678000,
+//             'weight' => 1,
+//             'width' => 12
+//         ],
+//         'payment_type' => 'postpay'
+//     ];
+//     // return $payload;
 
-    $response = Http::withHeaders([
-        'X-API-Key' => 'yQ0Od6uRNMBRZcPnOKDb1JXo4MVKPApTRhr0BD9eexP4yFLZ2EZ7SN5u8q0klO',
-        'accept' => 'application/json'
-    ])->withBody(json_encode($payload), 'application/json')->post('https://merchant-api.shipper.id/v3/order');
-    return response()->json($response);
-});
+//     $response = Http::withHeaders([
+//         'X-API-Key' => 'yQ0Od6uRNMBRZcPnOKDb1JXo4MVKPApTRhr0BD9eexP4yFLZ2EZ7SN5u8q0klO',
+//         'accept' => 'application/json'
+//     ])->withBody(json_encode($payload), 'application/json')->post('https://merchant-api.shipper.id/v3/order');
+//     return response()->json($response);
+// });

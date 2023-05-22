@@ -20,9 +20,12 @@ class AccessToken
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = ModelsAccessToken::where('token', $request->header('X-API-KEY'))->first();
+        $secret_key = hash('sha256', env('JWT_SECRET'));
+        $secret_iv = substr(hash('sha256', env('JWT_SECRET')), 0, 16);
+        $apikey = openssl_decrypt($request->header('X-API-KEY'), 'AES-256-CBC', $secret_key, 0, $secret_iv);
+        $token = ModelsAccessToken::where('token', $apikey)->first();
 
-        if (!$request->header('X-API-KEY')) {
+        if (!$token) {
             return response()->json([
                 'metadata' => [
                     'path' => '/',
