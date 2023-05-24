@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Mail;
+use Tymon\JWTAuth\Contracts\Providers\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::group([
 
 ], function ($router) {
 
-    Route::post('login', [AuthController::class, 'login']);
+    Route::post('login', [AuthController::class, 'login'])->middleware('accesstoken');
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
@@ -44,10 +45,15 @@ Route::group([
 });
 
 Route::prefix('inventory')->group(function () {
-    Route::get('/users', function () {
-        // Matches The "/admin/users" URL
-    });
-    Route::get('get-items', [ItemsController::class, 'create'])->name('inventory-item-create');
+    // Route::get('/users', function () {
+    //     // Matches The "/admin/users" URL
+    // });
+
+    // Items
+    Route::get('get-items', [ItemsController::class, 'create'])->name('inventory-item-create')->middleware('auth');
+    Route::post('store-items', [ItemsController::class, 'store'])->name('inventory-item-store');
+
+    // Order
     Route::post('order', [OrderController::class, 'store'])->name('inventory-order-store');
     Route::get('get-order', [OrderController::class, 'show'])->name('inventory-order-show');
 })->middleware([AccessToken::class]);

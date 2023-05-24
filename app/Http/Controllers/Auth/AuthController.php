@@ -25,7 +25,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register','verifyUser']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'verifyUser']]);
     }
 
     /**
@@ -44,10 +44,10 @@ class AuthController extends Controller
         // return $this->respondWithToken($token);
 
         $credentials['is_verified'] = 1;
-        
+
         try {
             // attempt to verify the credentials and create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['success' => false, 'error' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 404);
             }
         } catch (JWTException $e) {
@@ -55,7 +55,6 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
         }
         return $this->respondWithToken($token);
-
     }
     public function register(Request $request)
     {
@@ -81,23 +80,26 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password)
             ]);
             $verification_code = Str::random(30); //Generate verification code
-            DB::table('user_verifications')->insert(['user_id'=>$data->id,'token'=>$verification_code]);
-            $email= $request->email;
-            $name= $request->name;
+            DB::table('user_verifications')->insert(['user_id' => $data->id, 'token' => $verification_code]);
+            $email = $request->email;
+            $name = $request->name;
             $subject = "Please verify your email address.";
-            Mail::send('emails.verify', ['name' => $name, 'verification_code' => $verification_code],
-                function($mail) use ($email, $name, $subject){
+            Mail::send(
+                'emails.verify',
+                ['name' => $name, 'verification_code' => $verification_code],
+                function ($mail) use ($email, $name, $subject) {
                     $mail->from(env('MAIL_FROM_ADDRESS'), "From User/Company Name Goes Here");
                     $mail->to($email, $name);
                     $mail->subject($subject);
-                });
+                }
+            );
 
             return response()->json(['metadata' => [
                 'path' => '/auth/register',
                 'http_status_code' => 'Created',
                 'timestamp' => now()->timestamp,
                 'data' => $data,
-                'message'=>'Thanks for signing up! Please check your email to complete your registration.'
+                'message' => 'Thanks for signing up! Please check your email to complete your registration.'
             ]], 201);
         } catch (QueryException $th) {
             //throw $th;
@@ -106,32 +108,33 @@ class AuthController extends Controller
     }
 
     // Verify email Users
-    public function verifyUser($verification_code){
-        $check = DB::table('user_verifications')->where('token',$verification_code)->first();
+    public function verifyUser($verification_code)
+    {
+        $check = DB::table('user_verifications')->where('token', $verification_code)->first();
 
-        if(!is_null($check)){
+        if (!is_null($check)) {
             $user = User::find($check->user_id);
 
-            if($user->is_verified == 1){
+            if ($user->is_verified == 1) {
 
                 return response()->json(['metadata' => [
                     'path' => '/auth/register',
                     'http_status_code' => 'OK',
                     'timestamp' => now()->timestamp,
                     // 'data' => $data,
-                    'message'=>'Account already verified...'
+                    'message' => 'Account already verified...'
                 ]], 200);
             }
 
             $user->update(['is_verified' => 1]);
-            DB::table('user_verifications')->where('token',$verification_code)->delete();
+            DB::table('user_verifications')->where('token', $verification_code)->delete();
 
             return response()->json(['metadata' => [
                 'path' => '/auth',
                 'http_status_code' => 'OK',
                 'timestamp' => now()->timestamp,
                 // 'data' => $data,
-                'message'=>'You have successfully verified your email address.'
+                'message' => 'You have successfully verified your email address.'
             ]], 200);
         }
         return response()->json([
@@ -144,7 +147,7 @@ class AuthController extends Controller
                 ],
                 'timestamp' => now()->timestamp
             ]
-        ],401);
+        ], 401);
     }
     /**
      * Get the authenticated User.

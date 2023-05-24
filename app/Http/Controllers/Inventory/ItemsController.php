@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use DataTables;
 
 class ItemsController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,22 +33,9 @@ class ItemsController extends Controller
     public function create()
     {
         //
-        $data = User::all();
-        // return response()->json(["data" => $data]);
-        return response()->json([
-            'metadata' => [
-                'path' => '/inventory',
-                'http_status_code' => 'Created',
-                'timestamp' => now()->timestamp,
-                // 'order_id' => $uuid,
-            ],
-            'data' => $data,
-            'draw' => $data->count(),
-            'recordsTotal' => $data->count(),
-            'message' => 'Data',
+        $data = User::get();
 
-
-        ], 200);
+        return DataTables::of($data)->toJson();
     }
 
     /**
