@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\email\emailController;
 use App\Http\Controllers\Inventory\ItemsController;
 use App\Http\Controllers\Inventory\OrderController;
+use App\Http\Controllers\Inventory\StockController;
 use App\Http\Middleware\AccessToken;
 use App\Mail\IncomeMember;
 use App\Models\Items;
@@ -45,17 +46,23 @@ Route::group([
 });
 
 Route::prefix('inventory')->group(function () {
-    // Route::get('/users', function () {
-    //     // Matches The "/admin/users" URL
-    // });
-
     // Items
-    Route::get('get-items', [ItemsController::class, 'create'])->name('inventory-item-create')->middleware('auth');
+    Route::get('get-items', [ItemsController::class, 'create'])->name('inventory-item-create');
     Route::post('store-items', [ItemsController::class, 'store'])->name('inventory-item-store');
+
+
 
     // Order
     Route::post('order', [OrderController::class, 'store'])->name('inventory-order-store');
     Route::get('get-order', [OrderController::class, 'show'])->name('inventory-order-show');
+
+
+    // stocks
+    Route::prefix('stock')->controller(StockController::class)->group(function () {
+        Route::get('get-stocks', 'index')->name('inventory-stock-index');
+        Route::post('store', 'store')->name('inventory-stock-store');
+        Route::post('search-items', 'search_items')->name('inventory-search-items');
+    });
 })->middleware([AccessToken::class]);
 
 

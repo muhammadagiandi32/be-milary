@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Token;
 
 class JwtMiddleware
 {
@@ -17,18 +18,26 @@ class JwtMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $request
+        $header = $request->header('X-AUTH-TOKEN');
+        // try {
+        //     $user = JWTAuth::parseToken()->authenticate();
+        //     // JWTAuth::validate()
+        // } catch (Exception $e) {
+        //     if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+        //         return response()->json(['status' => 'Token is Invalid']);
+        //     } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+        //         return response()->json(['status' => 'Token is Expired']);
+        //     } else {
+        //         return response()->json(['status' => 'Authorization Token not found']);
+        //     }
+        // }
         try {
-            // $user = JWTAuth::parseToken()->authenticate();
-            JWTAuth::validate()
-        } catch (Exception $e) {
-            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
-                return response()->json(['status' => 'Token is Invalid']);
-            } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
-                return response()->json(['status' => 'Token is Expired']);
-            } else {
-                return response()->json(['status' => 'Authorization Token not found']);
-            }
+            //code...
+            $token = new Token($header);
+            JWTAuth::decode($token);
+        } catch (\Throwable $th) {
+            // throw $th;
+            return redirect()->route('/');
         }
         return $next($request);
     }

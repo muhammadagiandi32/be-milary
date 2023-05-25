@@ -25,6 +25,9 @@ class AccessToken
         $apikey = openssl_decrypt($request->header('X-API-KEY'), 'AES-256-CBC', $secret_key, 0, $secret_iv);
         $token = ModelsAccessToken::where('token', $request->header('X-API-KEY'))->first();
 
+        // $token = ModelsAccessToken::where('token', $apikey)->first();
+
+
         if (!$token) {
             return response()->json([
                 'metadata' => [

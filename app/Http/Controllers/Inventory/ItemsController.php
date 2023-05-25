@@ -44,19 +44,22 @@ class ItemsController extends Controller
     public function store(Request $request)
     {
         //
-
+        // return response()->json($request);
         $validator = Validator::make(request()->all(), [
             'item_name' => 'required',
             'size' => 'required',
-            'price' => 'required|integer',
+            'Price' => 'required|integer',
         ]);
         if ($validator->fails()) {
-            return response()->json(['metadata' => [
-                'path' => '/inventory',
-                'http_status_code' => 'Bad Request',
+            return response()->json([
+                'metadata' => [
+                    'path' => '/inventory',
+                    'http_status_code' => 'Bad Request',
+                    'errors' => $validator->messages(),
+                    'timestamp' => now()->timestamp
+                ],
                 'errors' => $validator->messages(),
-                'timestamp' => now()->timestamp
-            ]], 400);
+            ], 400);
         }
 
         try {
@@ -64,7 +67,7 @@ class ItemsController extends Controller
                 'uuid' => Str::uuid(),
                 'ItemName' => $request->item_name,
                 'Size' => $request->size,
-                'Price' => $request->price
+                'Price' => $request->Price
             ]);
             return response()->json(['metadata' => [
                 'path' => '/inventory',
