@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class IncomingStock extends Model
 {
     use HasFactory;
-    protected $fillable = ['uuid', 'StockId', 'ItemsId', 'StockId', 'total', 'Price'];
+    protected $table = 'incoming_stocks';
+    protected $fillable = ['uuid', 'StockId', 'ItemsId', 'StockId', 'total', 'Price', 'created_at'];
     protected $hidden = ['id'];
-    public $keyType = 'string';
+    // public $keyType = 'string';
 }

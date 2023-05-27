@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('incoming_stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid', 64)->unique();
+            $table->string('uuid', 255)->unique();
             $table->string('ItemsId');
             $table->string('StockId');
             $table->integer('total');

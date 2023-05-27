@@ -48,6 +48,7 @@ class OrderController extends Controller
                 'timestamp' => now()->timestamp
             ]], 400);
         }
+
         try {
             $item = Items::whereIn('uuid', $request->item_id)->get();
             $uuid = Str::uuid();
@@ -60,7 +61,7 @@ class OrderController extends Controller
                 $check_stock = DB::table('stocks')
                     ->where('ItemsId', $request->item_id[$i])
                     ->first();
-                // return $check_stock;
+                return $check_stock;
                 if ($check_stock->Stock < $request->qty[$i]) {
                     return response()->json(['metadata' => [
                         'path' => '/inventory',

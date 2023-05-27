@@ -13,8 +13,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Contracts\Providers\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +64,14 @@ Route::prefix('inventory')->group(function () {
         Route::get('get-stocks', 'index')->name('inventory-stock-index');
         Route::post('store', 'store')->name('inventory-stock-store');
         Route::post('search-items', 'search_items')->name('inventory-search-items');
+
+        Route::post('incoming-stocks', 'incoming_stocks')->name('inventory-stock-incoming');
+    });
+
+    Route::get('mutasi', function () {
+        $data = DB::table('incoming_stocks')->get();
+
+        return DataTables::of($data)->toJson();
     });
 })->middleware([AccessToken::class]);
 
