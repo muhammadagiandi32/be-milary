@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
+
+// use DataTables;
 
 class ItemsController extends Controller
 {
@@ -33,7 +35,7 @@ class ItemsController extends Controller
     public function create()
     {
         //
-        $data = User::get();
+        $data = Items::get();
 
         return DataTables::of($data)->toJson();
     }
@@ -47,6 +49,8 @@ class ItemsController extends Controller
         // return response()->json($request);
         $validator = Validator::make(request()->all(), [
             'item_name' => 'required',
+            // 'Color' => 'required',
+            // 'Style' => 'required',
             'size' => 'required',
             'Price' => 'required|integer',
         ]);
@@ -66,6 +70,8 @@ class ItemsController extends Controller
             $data =  Items::create([
                 'uuid' => Str::uuid(),
                 'ItemName' => $request->item_name,
+                'Color' => $request->Color,
+                'Style' => $request->Style,
                 'Size' => $request->size,
                 'Price' => $request->Price
             ]);
@@ -77,7 +83,7 @@ class ItemsController extends Controller
             ]], 201);
         } catch (QueryException $th) {
             //throw $th;
-            return response()->json($th);
+            return response()->json($th, 500);
         }
     }
 

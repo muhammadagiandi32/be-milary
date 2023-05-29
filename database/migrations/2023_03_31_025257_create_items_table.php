@@ -15,6 +15,8 @@ return new class extends Migration
             $table->bigIncrements('IdItems');
             $table->string('uuid', 255)->unique();
             $table->string('ItemName', 255);
+            $table->string('Color', 255)->nullable();
+            $table->string('Style', 255)->nullable();
             $table->string('Size', 255);
             $table->decimal('Price', $total = 10, $places = 2);
             // $table->decimal('Stock', $total = 10, $places = 2);

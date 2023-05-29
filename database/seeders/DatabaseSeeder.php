@@ -44,6 +44,254 @@ class DatabaseSeeder extends Seeder
         //     'Size' => 'XL',
         //     'Price' => 690850
         // ]);
+        $items_milarty = [
+            // Start
+            // Milary THIGH SLIMMER Color BLACK
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'THIGH SLIMMER',
+                'Color' => 'BLACK',
+                'Style' => 'THIGH SLIMMER',
+                'Size' => 'S',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'THIGH SLIMMER',
+                'Color' => 'BLACK',
+                'Style' => 'THIGH SLIMMER',
+                'Size' => 'M',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'THIGH SLIMMER',
+                'Color' => 'BLACK',
+                'Style' => 'THIGH SLIMMER',
+                'Size' => 'L',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'THIGH SLIMMER',
+                'Color' => 'BLACK',
+                'Style' => 'THIGH SLIMMER',
+                'Size' => 'XL',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            // End
+            // Milary THIGH SLIMMER Color BLACK
+
+            // Start
+            // Milary THIGH SLIMMER Color NUDE
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'THIGH SLIMMER',
+                'Color' => 'NUDE',
+                'Style' => 'THIGH SLIMMER',
+                'Size' => 'S',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'THIGH SLIMMER',
+                'Color' => 'NUDE',
+                'Style' => 'THIGH SLIMMER',
+                'Size' => 'M',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'THIGH SLIMMER',
+                'Color' => 'NUDE',
+                'Style' => 'THIGH SLIMMER',
+                'Size' => 'L',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'THIGH SLIMMER',
+                'Color' => 'NUDE',
+                'Style' => 'THIGH SLIMMER',
+                'Size' => 'XL',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            // End
+            // Milary THIGH SLIMMER Color NUDE
+
+            // Start
+            // Milary HIGH WAIST PANTY  Color NUDE
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'HIGH WAIST PANTY',
+                'Color' => 'NUDE',
+                'Style' => 'HIGH WAIST PANTY ',
+                'Size' => 'S',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'HIGH WAIST PANTY',
+                'Color' => 'NUDE',
+                'Style' => 'HIGH WAIST PANTY',
+                'Size' => 'M',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'HIGH WAIST PANTY',
+                'Color' => 'NUDE',
+                'Style' => 'HIGH WAIST PANTY',
+                'Size' => 'L',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'HIGH WAIST PANTY',
+                'Color' => 'NUDE',
+                'Style' => 'HIGH WAIST PANTY',
+                'Size' => 'XL',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            // Start
+            // Milary HIGH WAIST PANTY  Color NUDE
+
+            // Start
+            // Milary HIGH WAIST PANTY Color BLACK
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'HIGH WAIST PANTY',
+                'Color' => 'BLACK',
+                'Style' => 'HIGH WAIST PANTY',
+                'Size' => 'S',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'HIGH WAIST PANTY',
+                'Color' => 'BLACK',
+                'Style' => 'HIGH WAIST PANTY',
+                'Size' => 'M',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'HIGH WAIST PANTY',
+                'Color' => 'BLACK',
+                'Style' => 'HIGH WAIST PANTY',
+                'Size' => 'L',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'HIGH WAIST PANTY',
+                'Color' => 'BLACK',
+                'Style' => 'HIGH WAIST PANTY',
+                'Size' => 'XL',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            // End
+            // Milary THIGH SLIMMER Color BLACK
+
+            // Start
+            // Milary ALL IN ONE Color BLACK
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'ALL IN ONE',
+                'Color' => 'BLACK',
+                'Style' => 'ALL IN ONE',
+                'Size' => 'S',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'ALL IN ONE',
+                'Color' => 'BLACK',
+                'Style' => 'ALL IN ONE',
+                'Size' => 'M',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'ALL IN ONE',
+                'Color' => 'BLACK',
+                'Style' => 'ALL IN ONE',
+                'Size' => 'L',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'ALL IN ONE',
+                'Color' => 'BLACK',
+                'Style' => 'ALL IN ONE',
+                'Size' => 'XL',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            // End
+            // Milary ALL IN ONE Color BLACK
+
+            // Start
+            // Milary ALL IN ONE  Color NUDE
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'ALL IN ONE',
+                'Color' => 'NUDE',
+                'Style' => 'ALL IN ONE',
+                'Size' => 'S',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'ALL IN ONE',
+                'Color' => 'NUDE',
+                'Style' => 'ALL IN ONE',
+                'Size' => 'M',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'ALL IN ONE',
+                'Color' => 'NUDE',
+                'Style' => 'ALL IN ONE',
+                'Size' => 'L',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            [
+                'uuid' => Str::uuid(),
+                'ItemName' => 'ALL IN ONE',
+                'Color' => 'NUDE',
+                'Style' => 'ALL IN ONE',
+                'Size' => 'XL',
+                'Price' => 1200,
+                'created_at' => now()
+            ],
+            // Start
+            // Milary HIGH WAIST PANTY  Color NUDE
+        ];
+        Items::insert($items_milarty);
         Items::create([
             'uuid' => '30ac5d4c-dcb4-4b79-a82a-f636931af156',
             'ItemName' => 'AEROSPACE S',

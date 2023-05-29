@@ -70,7 +70,6 @@ Route::prefix('inventory')->group(function () {
 
     Route::get('mutasi', function () {
         $data = DB::table('incoming_stocks')->get();
-
         return DataTables::of($data)->toJson();
     });
 })->middleware([AccessToken::class]);

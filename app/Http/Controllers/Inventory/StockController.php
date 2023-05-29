@@ -23,10 +23,14 @@ class StockController extends Controller
     {
         //
         $data = DB::table('stocks')
-            ->leftJoin('items', 'stocks.ItemsId', '=', 'items.uuid')
-            ->select('stocks.Stock', 'items.ItemName', 'items.Size', 'items.Price')->get();
+            ->join('items', 'stocks.ItemsId', '=', 'items.uuid')
+            ->select('stocks.Stock', 'items.ItemName', 'items.Size', 'items.Color', 'items.Price')->orderBy('items.ItemName', 'ASC')->get();
 
-        return DataTables::of($data)->toJson();
+        return DataTables::of($data)
+            ->addColumn('itemNameDetails', function ($data) {
+                return $data->ItemName . ' ' . $data->Color;
+            })
+            ->toJson();
     }
     public function incoming_stocks(Request $request)
     {
@@ -57,7 +61,12 @@ class StockController extends Controller
             DB::beginTransaction();
             /* SQL operation n */
             $items = Items::where('uuid', $request->uuid)->first();
-            $stock = Stock::where('ItemsId', $request->uuid)->first();
+            $stock = Stock::firstOrCreate(['ItemsId' => $request->uuid], [
+                'uuid' => Str::uuid(),
+                'ItemsId' => $items->uuid,
+                'Stock' => 0,
+                'created_at' => now()
+            ]);
             $total_price = $items->Price * $request->qty;
             // $check_stock = Stock::where('ItemsId', $request->uuid)->where('Stock', '<', $request->qty)->exists();
 
@@ -71,7 +80,6 @@ class StockController extends Controller
             ]);
 
             Stock::where('ItemsId', $items->uuid)->increment('Stock', $incoming_stocks->total);
-            // dd($incoming_stocks);
             // if ($check_stock === true) {
             //     DB::rollback();
             // }
@@ -95,15 +103,17 @@ class StockController extends Controller
     public function search_items(Request $request)
     {
         //
+        // return $request;
+        // dd($request);
         $search = $request->search;
         if ($search == '') {
-            $data = DB::table('items')->limit(5)->get();
+            $data = Items::limit(5)->get();
         } else {
-            $data = DB::table('items')->where('ItemName', 'like', '%' . $request->search . '%')->limit(5)->get();
+            $data = Items::where('ItemName', 'LIKE', '%' . $search . '%')->limit(5)->get();
         }
         $response = [];
         foreach ($data as $item) {
-            $response[] = ['ItemName' => $item->ItemName, 'uuid' => $item->uuid];
+            $response[] = ['ItemName' => $item->ItemName . ' ' . $item->Color . ' ' . $item->Size, 'uuid' => $item->uuid];
         }
         return response()->json($response);
     }
