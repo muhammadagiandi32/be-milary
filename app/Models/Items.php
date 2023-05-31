@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Items extends Model
 {
     use HasFactory;
-    protected $fillable = ['uuid', 'ItemName', 'Color', 'Style', 'Size', 'Price'];
+    protected $fillable = ['uuid', 'ItemName', 'Color', 'Style', 'UOM', 'Size', 'Price'];
     protected $hidden = ['IdItems', 'id'];
     public $keyType = 'string';
     protected $primaryKey = 'uuid';

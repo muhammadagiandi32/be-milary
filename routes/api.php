@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\email\emailController;
 use App\Http\Controllers\Inventory\ItemsController;
 use App\Http\Controllers\Inventory\OrderController;
@@ -74,7 +75,13 @@ Route::prefix('inventory')->group(function () {
     });
 })->middleware([AccessToken::class]);
 
+// DASHBOARD
+Route::prefix('dashboard')->controller(DashboardController::class)->group(function () {
+    Route::get('aerosapace_total_box', 'aerosapace_total_box')->name('aerosapace-total-box');
+    Route::get('aerosapace_total_barang', 'aerosapace_total_barang')->name('aerosapace-total-barang');
+});
 
+// emails notifications
 Route::post('notifications/emails', [emailController::class, 'store']);
 
 Route::get('/test/paginate', function () {

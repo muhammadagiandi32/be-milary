@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('Color', 255)->nullable();
             $table->string('Style', 255)->nullable();
             $table->string('Size', 255);
+            $table->string('UOM', 255)->nullable();
             $table->decimal('Price', $total = 10, $places = 2);
             // $table->decimal('Stock', $total = 10, $places = 2);
             $table->timestamps();

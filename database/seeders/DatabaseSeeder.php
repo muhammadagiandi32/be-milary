@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'THIGH SLIMMER',
                 'Size' => 'S',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -62,6 +63,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'THIGH SLIMMER',
                 'Size' => 'M',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -71,6 +73,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'THIGH SLIMMER',
                 'Size' => 'L',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -80,6 +83,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'THIGH SLIMMER',
                 'Size' => 'XL',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -94,6 +98,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'THIGH SLIMMER',
                 'Size' => 'S',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -103,6 +108,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'THIGH SLIMMER',
                 'Size' => 'M',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -112,6 +118,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'THIGH SLIMMER',
                 'Size' => 'L',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -121,6 +128,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'THIGH SLIMMER',
                 'Size' => 'XL',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -135,6 +143,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'HIGH WAIST PANTY ',
                 'Size' => 'S',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -144,6 +153,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'HIGH WAIST PANTY',
                 'Size' => 'M',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -153,6 +163,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'HIGH WAIST PANTY',
                 'Size' => 'L',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -162,6 +173,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'HIGH WAIST PANTY',
                 'Size' => 'XL',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -176,6 +188,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'HIGH WAIST PANTY',
                 'Size' => 'S',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -185,6 +198,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'HIGH WAIST PANTY',
                 'Size' => 'M',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -194,6 +208,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'HIGH WAIST PANTY',
                 'Size' => 'L',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -203,6 +218,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'HIGH WAIST PANTY',
                 'Size' => 'XL',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -217,6 +233,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'ALL IN ONE',
                 'Size' => 'S',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -226,6 +243,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'ALL IN ONE',
                 'Size' => 'M',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -235,6 +253,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'ALL IN ONE',
                 'Size' => 'L',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -244,6 +263,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'BLACK',
                 'Style' => 'ALL IN ONE',
                 'Size' => 'XL',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -258,6 +278,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'ALL IN ONE',
                 'Size' => 'S',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -267,6 +288,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'ALL IN ONE',
                 'Size' => 'M',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -276,6 +298,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'ALL IN ONE',
                 'Size' => 'L',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -285,6 +308,7 @@ class DatabaseSeeder extends Seeder
                 'Color' => 'NUDE',
                 'Style' => 'ALL IN ONE',
                 'Size' => 'XL',
+                'UOM' => 'PCS',
                 'Price' => 1200,
                 'created_at' => now()
             ],
@@ -296,6 +320,7 @@ class DatabaseSeeder extends Seeder
             'uuid' => '30ac5d4c-dcb4-4b79-a82a-f636931af156',
             'ItemName' => 'AEROSPACE S',
             'Size' => 'S',
+            'UOM' => 'BOX',
             'Price' => 690850
         ]);
         Items::create([
@@ -304,6 +329,7 @@ class DatabaseSeeder extends Seeder
 
             'ItemName' => 'AEROSPACE M',
             'Size' => 'M',
+            'UOM' => 'BOX',
             'Price' => 690850
         ]);
         Items::create([
@@ -312,6 +338,7 @@ class DatabaseSeeder extends Seeder
 
             'ItemName' => 'AEROSPACE L',
             'Size' => 'L',
+            'UOM' => 'BOX',
             'Price' => 690850
         ]);
 
