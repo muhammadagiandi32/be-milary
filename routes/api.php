@@ -57,6 +57,7 @@ Route::prefix('inventory')->group(function () {
 
     // Order
     Route::post('order', [OrderController::class, 'store'])->name('inventory-order-store');
+    Route::post('create-order', [OrderController::class, 'creatae_order_store'])->name('inventory-order-create-orderstore');
     Route::get('get-order', [OrderController::class, 'show'])->name('inventory-order-show');
 
 
@@ -79,6 +80,7 @@ Route::prefix('inventory')->group(function () {
 Route::prefix('dashboard')->controller(DashboardController::class)->group(function () {
     Route::get('aerosapace_total_box', 'aerosapace_total_box')->name('aerosapace-total-box');
     Route::get('aerosapace_total_barang', 'aerosapace_total_barang')->name('aerosapace-total-barang');
+    Route::get('aerosapace_chard_stock', 'chard_stock')->name('aerosapace-chard-stock');
 });
 
 // emails notifications

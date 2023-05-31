@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inventory;
 use App\Http\Controllers\Controller;
 use App\Models\Items;
 use App\Models\Order;
+use App\Models\OutgoingStock;
 use App\Models\Stock;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -98,6 +99,71 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
+    public function creatae_order_store(Request $request)
+    {
+        $validator = Validator::make(request()->all(), [
+            'item_name' => 'required',
+            'qty' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['metadata' => [
+                'path' => '/inventory',
+                'http_status_code' => 'Bad Request',
+                'errors' => $validator->messages(),
+                'timestamp' => now()->timestamp
+            ]], 400);
+        }
+        try {
+            //code...
+            DB::beginTransaction();
+            $items = Items::where('uuid', $request->uuid)->first();
+
+            $stock = Stock::firstOrCreate(['ItemsId' => $request->uuid], [
+                'uuid' => Str::uuid(),
+                'ItemsId' => $request->uuid,
+                'Stock' => 0,
+                'created_at' => now()
+            ]);
+            $total_price = $items->Price * $request->qty;
+
+            $check_stock = Stock::where('ItemsId', $request->uuid)->where('Stock', '<', $request->qty)->exists();
+            $outgoing_stock = OutgoingStock::create([
+                'uuid' => Str::uuid(),
+                'ItemsId' => $items->uuid,
+                'StockId' => $stock->uuid,
+                'total' => $request->qty,
+                'Price' => $total_price,
+                'created_at' => now()
+            ]);
+            Stock::where('ItemsId', $items->uuid)->decrement('Stock', $outgoing_stock->total);
+
+            if ($check_stock === true) {
+                DB::rollback();
+                return response()->json([
+                    'metadata' => [
+                        'path' => '/inventory',
+                        'http_status_code' => 'Bad Request',
+                        'timestamp' => now()->timestamp
+                    ],
+                    'errors' => 'Stock Not Avalible',
+                    'http_status_code' => true
+                ], 200);
+            }
+            DB::commit();
+            return response()->json(['metadata' => [
+                'path' => '/inventory',
+                'http_status_code' => 'Created',
+                'timestamp' => now()->timestamp,
+                'data' => $outgoing_stock
+            ]], 201);
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return response()->json($th);
+        }
+
+        // return response()->json($stock);
+    }
     public function show()
     {
         //
